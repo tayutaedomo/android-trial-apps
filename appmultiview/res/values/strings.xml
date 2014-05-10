@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">appmultiview</string>
+    <string name="label_menu_normal_item">Normal item</string>
+    <string name="label_menu_additional_item">Additional item</string>
+    <string name="label_second_activity">SecondActivity</string>
+    <string name="label_button1">BUTTON 1</string>
+</resources>
