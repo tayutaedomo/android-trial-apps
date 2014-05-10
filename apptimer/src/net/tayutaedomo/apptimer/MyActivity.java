@@ -40,10 +40,31 @@ public class MyActivity extends Activity {
     protected void onClickButton1(Button button) {
         if(mTimer == null){
             //タイマーの初期化処理
-            timerTask = new MyTimerTask();
             mLaptime = 0.0f;
             mTimer = new Timer(true);
-            mTimer.schedule(timerTask, 100, 100);
+
+            //timerTask = new MyTimerTask();
+            //mTimer.schedule(timerTask, 100, 100);
+            mTimer.schedule( new TimerTask(){
+                @Override
+                public void run() {
+                    // mHandlerを通じてUI Threadへ処理をキューイング
+                    mHandler.post( new Runnable() {
+                        public void run() {
+
+                            //実行間隔分を加算処理
+                            mLaptime +=  0.1d;
+
+                            //計算にゆらぎがあるので小数点第1位で丸める
+                            BigDecimal bi = new BigDecimal(mLaptime);
+                            float outputValue = bi.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+
+                            //現在のLapTime
+                            mTextView.setText(Float.toString(outputValue));
+                        }
+                    });
+                }
+            }, 100, 100);
         }
     }
 
